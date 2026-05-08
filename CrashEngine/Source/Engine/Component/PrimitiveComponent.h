@@ -13,6 +13,7 @@
 #include "Collision/OverlapInfo.h"
 #include "Collision/CollisionChannels.h"
 
+class FDynamicMeshBuffer;
 class FPrimitiveProxy;
 class FScene;
 class FMeshBuffer;
@@ -35,6 +36,7 @@ public:
     void Serialize(FArchive& Ar) override;
 
     virtual FMeshBuffer* GetMeshBuffer() const { return nullptr; }
+    virtual FDynamicMeshBuffer* GetDynamicMeshBuffer() const { return nullptr; }
     virtual FMeshDataView GetMeshDataView() const { return {}; }
 
     void SetVisibility(bool bNewVisible);
