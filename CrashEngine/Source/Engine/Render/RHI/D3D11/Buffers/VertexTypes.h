@@ -60,6 +60,18 @@ struct FVertexPNCT_T
     FVector4 Tangent;
 };
 
+struct FSkeletalMeshVertex
+{
+    FVector  Position;
+    FVector  Normal;
+    FVector4 Color;
+    FVector2 UV;
+    FVector4 Tangent;
+
+    int32 BoneIndices[4];
+    float BoneWeights[4];
+};
+
 template <typename VertexType>
 // TMeshData는 메시 데이터와 렌더 제출 정보를 다룹니다.
 struct TMeshData

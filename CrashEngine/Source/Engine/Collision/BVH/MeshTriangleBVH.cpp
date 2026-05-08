@@ -27,8 +27,8 @@ FBoundingBox MakeTriangleBounds(const FVector& V0, const FVector& V1, const FVec
 }
 
 } // namespace
-
-void FMeshTriangleBVH::BuildNow(const FStaticMesh& Mesh)
+template <typename MeshType>
+void FMeshTriangleBVH::BuildNow(const MeshType& Mesh)
 {
     // 메시가 바뀌었을 때 triangle leaf와 packet, node 배열을 통째로 다시 만듭니다.
     TriangleLeaves.clear();
@@ -114,7 +114,8 @@ void FMeshTriangleBVH::BuildNow(const FStaticMesh& Mesh)
     }
 }
 
-void FMeshTriangleBVH::EnsureBuilt(const FStaticMesh& Mesh)
+template <typename MeshType>
+void FMeshTriangleBVH::EnsureBuilt(const MeshType& Mesh)
 {
     // static mesh asset은 로드 후 고정된다고 보고, 아직 비어 있을 때만 1회 빌드합니다.
     if (!BVH.GetNodes().empty())
@@ -124,7 +125,8 @@ void FMeshTriangleBVH::EnsureBuilt(const FStaticMesh& Mesh)
     BuildNow(Mesh);
 }
 
-bool FMeshTriangleBVH::RaycastLocal(const FVector& LocalOrigin, const FVector& LocalDirection, const FStaticMesh& Mesh, FHitResult& OutHitResult) const
+template <typename MeshType>
+bool FMeshTriangleBVH::RaycastLocal(const FVector& LocalOrigin, const FVector& LocalDirection, const MeshType& Mesh, FHitResult& OutHitResult) const
 {
     // 로컬 공간 ray로 메시 BVH를 front-to-back 순회하면서 가장 가까운 삼각형 hit를 찾습니다
     struct FTraversalEntry

@@ -9,6 +9,9 @@ public:
     ~FDynamicVertexBuffer() { Release(); }
     FDynamicVertexBuffer(const FDynamicVertexBuffer&)            = delete;
     FDynamicVertexBuffer& operator=(const FDynamicVertexBuffer&) = delete;
+    FDynamicVertexBuffer(FDynamicVertexBuffer&&) noexcept;
+    FDynamicVertexBuffer& operator=(FDynamicVertexBuffer&&) noexcept;
+
     void                  Create(ID3D11Device* InDevice, uint32 InMaxCount, uint32 InStride);
     void                  Release();
     void                  EnsureCapacity(ID3D11Device* InDevice, uint32 RequiredCount);

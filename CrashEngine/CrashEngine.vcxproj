@@ -413,6 +413,7 @@ if "$(Configuration)|$(Platform)"=="Release|x64" if exist "$(ProjectDir)ThirdPar
     <ClCompile Include="Source\Engine\Mesh\MeshSimplifier.cpp" />
     <ClCompile Include="Source\Engine\Mesh\ObjImporter.cpp" />
     <ClCompile Include="Source\Engine\Mesh\ObjManager.cpp" />
+    <ClCompile Include="Source\Engine\Mesh\SkeletalMesh.cpp" />
     <ClCompile Include="Source\Engine\Mesh\StaticMesh.cpp" />
     <ClCompile Include="Source\Engine\Object\FName.cpp" />
     <ClCompile Include="Source\Engine\Object\Object.cpp" />
@@ -759,6 +760,8 @@ if "$(Configuration)|$(Platform)"=="Release|x64" if exist "$(ProjectDir)ThirdPar
     <ClInclude Include="Source\Engine\Mesh\MeshSimplifier.h" />
     <ClInclude Include="Source\Engine\Mesh\ObjImporter.h" />
     <ClInclude Include="Source\Engine\Mesh\ObjManager.h" />
+    <ClInclude Include="Source\Engine\Mesh\SkeletalMesh.h" />
+    <ClInclude Include="Source\Engine\Mesh\SkeletalMeshAsset.h" />
     <ClInclude Include="Source\Engine\Mesh\StaticMesh.h" />
     <ClInclude Include="Source\Engine\Mesh\StaticMeshAsset.h" />
     <ClInclude Include="Source\Engine\Object\FName.h" />
@@ -847,6 +850,7 @@ if "$(Configuration)|$(Platform)"=="Release|x64" if exist "$(ProjectDir)ThirdPar
     <ClInclude Include="Source\Engine\Render\RHI\D3D11\Buffers\DynamicVertexBuffer.h" />
     <ClInclude Include="Source\Engine\Render\RHI\D3D11\Buffers\IndexBuffer.h" />
     <ClInclude Include="Source\Engine\Render\RHI\D3D11\Buffers\MeshBuffer.h" />
+    <ClInclude Include="Source\Engine\Render\RHI\D3D11\Buffers\DynamicMeshBuffer.h" />
     <ClInclude Include="Source\Engine\Render\RHI\D3D11\Buffers\VertexBuffer.h" />
     <ClInclude Include="Source\Engine\Render\RHI\D3D11\Buffers\VertexTypes.h" />
     <ClInclude Include="Source\Engine\Render\RHI\D3D11\Common\D3D11API.h" />

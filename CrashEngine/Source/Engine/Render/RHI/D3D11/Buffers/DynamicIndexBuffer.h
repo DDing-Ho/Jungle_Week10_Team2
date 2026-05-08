@@ -9,6 +9,8 @@ public:
     ~FDynamicIndexBuffer() { Release(); }
     FDynamicIndexBuffer(const FDynamicIndexBuffer&)            = delete;
     FDynamicIndexBuffer& operator=(const FDynamicIndexBuffer&) = delete;
+    FDynamicIndexBuffer(FDynamicIndexBuffer&&) noexcept;
+    FDynamicIndexBuffer& operator=(FDynamicIndexBuffer&&) noexcept;
     void                 Create(ID3D11Device* InDevice, uint32 InMaxCount);
     void                 Release();
     void                 EnsureCapacity(ID3D11Device* InDevice, uint32 RequiredCount);

@@ -225,6 +225,29 @@ ID3D11Buffer* FIndexBuffer::GetBuffer() const
     return Buffer;
 }
 
+FDynamicVertexBuffer::FDynamicVertexBuffer(FDynamicVertexBuffer&& Other) noexcept
+    : Buffer(Other.Buffer), MaxCount(Other.MaxCount), Stride(Other.Stride)
+{
+    Other.Buffer = nullptr;
+    Other.MaxCount = 0;
+    Other.Stride = 0;
+}
+
+FDynamicVertexBuffer& FDynamicVertexBuffer::operator=(FDynamicVertexBuffer&& Other) noexcept
+{
+    if (this != &Other)
+    {
+        Release();
+        Buffer = Other.Buffer;
+        MaxCount = Other.MaxCount;
+        Stride = Other.Stride;
+        Other.Buffer = nullptr;
+        Other.MaxCount = 0;
+        Other.Stride = 0;
+    }
+    return *this;
+}
+
 void FDynamicVertexBuffer::Create(ID3D11Device* InDevice, uint32 InMaxCount, uint32 InStride)
 {
     Release();
@@ -290,6 +313,27 @@ void FDynamicVertexBuffer::Bind(ID3D11DeviceContext* Context, uint32 Slot)
     Context->IASetVertexBuffers(Slot, 1, &Buffer, &Stride, &Offset);
 }
 
+FDynamicIndexBuffer::FDynamicIndexBuffer(FDynamicIndexBuffer&& Other) noexcept
+    :Buffer(Other.Buffer), MaxCount(Other.MaxCount)
+{
+    Other.Buffer = nullptr;
+    Other.MaxCount = 0;
+}
+
+FDynamicIndexBuffer& FDynamicIndexBuffer::operator=(FDynamicIndexBuffer&& Other) noexcept
+{
+    if (this != &Other)
+    {
+        Release();
+        Buffer = Other.Buffer;
+        MaxCount = Other.MaxCount;
+        Other.Buffer = nullptr;
+        Other.MaxCount = 0;
+    }
+
+    return *this;
+}
+
 void FDynamicIndexBuffer::Create(ID3D11Device* InDevice, uint32 InMaxCount)
 {
     Release();
@@ -351,4 +395,10 @@ bool FDynamicIndexBuffer::Update(ID3D11DeviceContext* Context, const void* Data,
 void FDynamicIndexBuffer::Bind(ID3D11DeviceContext* Context)
 {
     Context->IASetIndexBuffer(Buffer, DXGI_FORMAT_R32_UINT, 0);
+}
+
+void FDynamicMeshBuffer::Release()
+{
+    DynamicVertexBuffer.Release();
+    IndexBuffer.Release();
 }
