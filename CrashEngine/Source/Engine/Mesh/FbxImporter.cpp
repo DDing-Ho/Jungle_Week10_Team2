@@ -1,4 +1,4 @@
-// FBX SDK based skeletal mesh importer.
+﻿// FBX SDK based skeletal mesh importer.
 #include "Mesh/FbxImporter.h"
 
 #include "Core/Logging/LogMacros.h"
@@ -207,7 +207,7 @@ void BuildSkeleton(FbxScene* Scene, FSkeletalMesh& OutMesh, TMap<FbxNode*, int32
         if (FbxNode* Parent = Node->GetParent())
         {
             const FMatrix ParentGlobal = ToEngineMatrix(Parent->EvaluateGlobalTransform());
-            Bone.LocalBindPose = ParentGlobal.GetInverse() * Bone.GlobalBindPose;
+            Bone.LocalBindPose = Bone.GlobalBindPose * ParentGlobal.GetInverse();
         }
         else
         {
@@ -308,9 +308,7 @@ void BuildSkinWeightsForVertices(const TArray<FVertexBuildInfo>& VertexInfos,
         {
             TArray<FControlPointInfluence> Influences = ControlPointInfluences[ControlPointIndex];
             std::sort(Influences.begin(), Influences.end(), [](const FControlPointInfluence& A, const FControlPointInfluence& B)
-            {
-                return A.Weight > B.Weight;
-            });
+                      { return A.Weight > B.Weight; });
 
             const int32 Count = (std::min)(static_cast<int32>(Influences.size()), MAX_BONE_INFLUENCES);
             for (int32 InfluenceIndex = 0; InfluenceIndex < Count; ++InfluenceIndex)
@@ -478,4 +476,3 @@ bool FFbxImporter::ImportSkeletalMesh(const FString& FbxFilePath, FSkeletalMesh&
 
     return true;
 }
-
