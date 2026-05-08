@@ -224,10 +224,10 @@ void BuildSkeleton(FbxScene* Scene, FSkeletalMesh& OutMesh, TMap<FbxNode*, int32
         FbxNode* Parent = Node->GetParent();
         while (Parent)
         {
-            auto ParentIt = OutBoneIndexByNode.find(Parent);
-            if (ParentIt != OutBoneIndexByNode.end())
+            auto ParentIterator = OutBoneIndexByNode.find(Parent);
+            if (ParentIterator != OutBoneIndexByNode.end())
             {
-                OutMesh.Bones[BoneIndex].ParentIndex = ParentIt->second;
+                OutMesh.Bones[BoneIndex].ParentIndex = ParentIterator->second;
                 break;
             }
             Parent = Parent->GetParent();
@@ -258,13 +258,13 @@ void BuildControlPointInfluences(FbxMesh* Mesh,
         {
             FbxCluster* Cluster = Skin->GetCluster(ClusterIndex);
             FbxNode* LinkNode = Cluster ? Cluster->GetLink() : nullptr;
-            auto BoneIt = BoneIndexByNode.find(LinkNode);
-            if (BoneIt == BoneIndexByNode.end())
+            auto BoneIterator = BoneIndexByNode.find(LinkNode);
+            if (BoneIterator == BoneIndexByNode.end())
             {
                 continue;
             }
 
-            const int32 BoneIndex = BoneIt->second;
+            const int32 BoneIndex = BoneIterator->second;
 
             FbxAMatrix LinkBindMatrix;
             Cluster->GetTransformLinkMatrix(LinkBindMatrix);
