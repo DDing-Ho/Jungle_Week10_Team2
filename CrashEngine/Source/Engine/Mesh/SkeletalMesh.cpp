@@ -137,7 +137,7 @@ void USkeletalMesh::EnsureMeshTrianglePickingBVHBuilt() const
         return;
     }
 
-    MeshTrianglePickingBVH.EnsureBuilt(*SkeletalMeshAsset);
+    MeshTrianglePickingBVH.EnsureBuilt<FSkeletalMesh>(*SkeletalMeshAsset);
 }
 
 bool USkeletalMesh::RaycastMeshTrianglesWithBVHLocal(const FVector& LocalOrigin, const FVector& LocalDirection, FHitResult& OutHitResult) const
@@ -148,5 +148,5 @@ bool USkeletalMesh::RaycastMeshTrianglesWithBVHLocal(const FVector& LocalOrigin,
     }
 
     EnsureMeshTrianglePickingBVHBuilt();
-    return MeshTrianglePickingBVH.RaycastLocal(LocalOrigin, LocalDirection, *SkeletalMeshAsset, OutHitResult);
+    return MeshTrianglePickingBVH.RaycastLocal<FSkeletalMesh>(LocalOrigin, LocalDirection, *SkeletalMeshAsset, OutHitResult);
 }

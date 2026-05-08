@@ -1,4 +1,5 @@
-﻿// 충돌/피킹 영역의 세부 동작을 구현합니다.
+﻿/*
+// 충돌/피킹 영역의 세부 동작을 구현합니다.
 #include "Collision/BVH/MeshTriangleBVH.h"
 
 #include "Collision/RayUtils.h"
@@ -274,3 +275,4 @@ bool FMeshTriangleBVH::RaycastLocal(const FVector& LocalOrigin, const FVector& L
 
     return bHit;
 }
+*/

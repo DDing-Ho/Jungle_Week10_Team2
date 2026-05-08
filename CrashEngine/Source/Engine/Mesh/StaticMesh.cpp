@@ -174,7 +174,7 @@ void UStaticMesh::EnsureMeshTrianglePickingBVHBuilt() const
         return;
     }
 
-    MeshTrianglePickingBVH.EnsureBuilt(*StaticMeshAsset);
+    MeshTrianglePickingBVH.EnsureBuilt<FStaticMesh>(*StaticMeshAsset);
 }
 
 bool UStaticMesh::RaycastMeshTrianglesWithBVHLocal(const FVector& LocalOrigin, const FVector& LocalDirection, FHitResult& OutHitResult) const
@@ -185,7 +185,7 @@ bool UStaticMesh::RaycastMeshTrianglesWithBVHLocal(const FVector& LocalOrigin, c
     }
 
     EnsureMeshTrianglePickingBVHBuilt();
-    return MeshTrianglePickingBVH.RaycastLocal(LocalOrigin, LocalDirection, *StaticMeshAsset, OutHitResult);
+    return MeshTrianglePickingBVH.RaycastLocal<FStaticMesh>(LocalOrigin, LocalDirection, *StaticMeshAsset, OutHitResult);
 }
 
 FMeshBuffer* UStaticMesh::GetLODMeshBuffer(uint32 LODLevel) const

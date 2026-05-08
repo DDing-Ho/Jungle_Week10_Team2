@@ -6,7 +6,6 @@
 #include "Object/Object.h"
 #include "StaticMeshAsset.h"
 #include "Collision/BVH/MeshTriangleBVH.h"
-#include "Render/RHI/D3D11/Buffers/VertexTypes.h"
 
 using FMeshMaterial = FStaticMaterial;
 
@@ -21,7 +20,7 @@ public:
     USkeletalMesh() = default;
     ~USkeletalMesh() override;
 
-    void Serialize(FArchive& Ar);
+    void Serialize(FArchive& Ar) override;
 
     const FString& GetAssetPathFileName() const;
 

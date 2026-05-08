@@ -23,6 +23,16 @@ struct FSkeletalBone
     FTransform RefLocalTransform;
     FMatrix RefGlobalMatrix;
     FMatrix InverseBindPose;
+
+    friend FArchive& operator<<(FArchive& Ar, FSkeletalBone& Bone)
+    {
+        Ar << Bone.Name;
+        Ar << Bone.ParentIndex;
+        Ar << Bone.RefLocalTransform.Location;
+        Ar << Bone.RefLocalTransform.Rotation;
+        Ar << Bone.RefLocalTransform.Scale;
+        return Ar;
+    }
 };
 
 struct FSkeletalMeshSection
