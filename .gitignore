@@ -470,3 +470,7 @@ CMakeLists.txt
 
 # Runtime generated engine data
 CrashEngine/Saved/
+
+# Keep vendored third-party libraries, even when subfolders are named Debug/Release.
+!CrashEngine/ThirdParty/**/[Ll]ib/
+!CrashEngine/ThirdParty/**/[Ll]ib/**
